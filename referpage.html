@@ -1,0 +1,68 @@
+<html>
+<head>
+<script src="https://cdnsecakmi.kaltura.com/html5/html5lib/v2.3.1/resources/jquery/jquery.min.js"></script>
+<link href="https://cdnsecakmi.kaltura.com/html5/html5lib/v2.3.1/docs/bootstrap/build/css/bootstrap.min.css" rel="stylesheet">
+<style>
+body { padding-left: 25%; }
+</style>
+</head>
+
+<body>
+<br />
+Thanks for submitting your form!
+<script src="http://cdnapi.kaltura.com/p/1760911/sp/176091100/embedIframeJs/uiconf_id/24716431/partner_id/1760911"></script>
+<div id="kaltura_player_1402777560" style="width: 560px; height: 395px;"></div>
+<script>
+
+    function jsCallbackReady(objectId) {
+        window.player = document.getElementById(objectId);
+
+        window.player.addJsListener("mediaReady" , function(){
+			onPlay();
+		});
+        window.player.addJsListener("playerUpdatePlayhead" , function(data){
+            window.playerPosition = data;
+			if ( window.playerPosition > window.randTime + 5) {
+				onPause();
+				$('#play').hide();
+				$('#retime').show();
+				$('#replay').show();
+			}
+            console.log(data);
+        });
+    }
+
+
+    function onPlay(){
+		window.player.sendNotification("doPlay");
+    }
+    function onPause(){
+        window.player.sendNotification("doPause");
+    }
+    function onSeek(seekTo){
+        window.player.sendNotification("doSeek" , seekTo);
+    }
+	function rePlay(){
+		onSeek(window.randTime , true);
+		window.player.sendNotification("doPlay");
+    }
+	kWidget.embed({
+	"targetId": "kaltura_player_1402777560",
+	"wid": "_1760911",
+	"uiconf_id": 24716431,
+	"flashvars": {
+	"streamerType": "http",
+	"scrubber.plugin": "false",
+	"playPauseBtn.plugin": "false",
+	"largePlayBtn.plugin": "false",
+	"autoPlay": "true",
+	"disableOnScreenClick": "true"
+	},
+	"cache_st": 1402777560,
+	"entry_id": "1_t0jg1t0g"
+	});
+	
+</script>
+
+</body>
+</html>
